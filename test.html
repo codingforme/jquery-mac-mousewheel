@@ -26,7 +26,7 @@
         }
     </style>
     <script src="http://code.jquery.com/jquery-git.js"></script>
-    <script src="mac.mousewheel.js"></script>
+    <script src="jquery.mac.mousewheel.js"></script>
 </head>
 <body >
      <div id="t">path</div>
@@ -35,7 +35,7 @@
         var $t = $("#t");
         var $t2 = $("#t2");
         $("body").macMouseWheel({
-            captureTime : 100, //移动效果可放大缩小这个效果
+            captureTime : 1000, //移动效果可放大缩小这个效果
             //手势滑动路径，x/y
             onPath : function(x, y){
                 //console.log('x:' + x, 'y:' + y);
