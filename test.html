@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <style type="text/css">
+        body, html{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+            color: white;
+        }
+    	#t, #t2{
+            position: absolute;
+            top: 0;
+            left: 0;
+    		width: 50px;
+    		height: 50px;
+    		background: #a9dafb;
+    	}
+        #t2{
+            left: 50px;
+            background: red;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-git.js"></script>
+    <script src="mac.mousewheel.js"></script>
+</head>
+<body >
+     <div id="t">path</div>
+     <div id="t2">gesture</div>
+     <script type="text/javascript">
+        var $t = $("#t");
+        var $t2 = $("#t2");
+        $("body").macMouseWheel({
+            captureTime : 100, //移动效果可放大缩小这个效果
+            //手势滑动路径，x/y
+            onPath : function(x, y){
+                //console.log('x:' + x, 'y:' + y);
+                var offset = $t.offset(),
+                    top = offset.top + y,
+                    left = offset.left + x;
+
+                $t.css({
+                    top : top + 'px',
+                    left : left + 'px'
+                })
+            },
+            //手势解析，上/下/左/右/放大/缩小
+            onGesture : function(gesture){
+                //console.log(gesture);
+                var offset = $t2.offset(),
+                    top = offset.top,
+                    left = offset.left,
+                    width = $t2.width(),
+                    height = $t2.height();
+                switch(gesture){
+                    case 'down':
+                        top += 50;
+                        break;
+                    case 'up':
+                        top -= 50;
+                        break;
+                    case 'left':
+                        left -= 50;
+                        break;
+                    case 'right':
+                        left += 50;
+                        break;
+                    case 'zoom':
+                        width *= 1.5;
+                        height *= 1.5;
+                        break;
+                    case 'mini':
+                        width /= 1.5;
+                        height /= 1.5;
+                        break;
+                }
+                $t2.css({
+                    top : top + 'px',
+                    left : left + 'px',
+                    width : width,
+                    height : height
+                })
+            }
+        });
+     </script>
+</body>
+</html>
